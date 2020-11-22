@@ -4,12 +4,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h2 class="page-title">Employee Edit Page</h2>
+                <h2 class="page-title">Employee Add Page</h2>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb p-0 m-0">
                         <li class="breadcrumb-item"><router-link to="/home">Dashboard</router-link></li>
-                        <li class="breadcrumb-item active">Employee Edit</li>
+                        <li class="breadcrumb-item active">Employee Add</li>
                     </ol>
                 </div>
                 <div class="clearfix"></div>
@@ -23,17 +23,17 @@
     <div class="col-xl-12">
         <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title text-center">Edit Employee</h2>
+                    <h2 class="card-title text-center">Add Employee</h2>
                     <router-link to="/all-employee" class="btn btn-success">All Employee</router-link>
                 </div>
                 <div class="card-body">
-                    <form class="user" @submit.prevent="employeeUpdate" enctype="multipart/form-data">
+                    <form class="user" @submit.prevent="employeeInsert" enctype="multipart/form-data">
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Employee Name</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" v-model="form.name">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Employee full name" v-model="form.name">
                                     <span class="text-danger" v-if="errors.name"> {{ errors.name[0] }} </span>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                             <div class="col-md-6">    
                                 <div class="form-group">
                                     <label for="exampleInputPassword2">Employee Email</label>
-                                    <input type="email" class="form-control" id="exampleInputPassword2" v-model="form.email">
+                                    <input type="email" class="form-control" id="exampleInputPassword2" placeholder="Employee email" v-model="form.email">
                                     <span class="text-danger" v-if="errors.email"> {{ errors.email[0] }} </span>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword7">Employee Phone</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword7" v-model="form.phone">
+                                    <input type="number" class="form-control" id="exampleInputPassword7" placeholder="Employee Phone" v-model="form.phone">
                                     <span class="text-danger" v-if="errors.phone"> {{ errors.phone[0] }} </span>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                             <div class="col-md-6">    
                                 <div class="form-group">
                                     <label for="exampleInputPassword4">Employee Salary</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword4" v-model="form.salary">
+                                    <input type="number" class="form-control" id="exampleInputPassword4" placeholder="Employee Salary" v-model="form.salary">
                                     <span class="text-danger" v-if="errors.salary"> {{ errors.salary[0] }} </span>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                             <div class="col-md-6">    
                                <div class="form-group">
                                     <label for="exampleInputPassword6">Employee NID</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword6" v-model="form.nid">
+                                    <input type="number" class="form-control" id="exampleInputPassword6" placeholder="Employee NID" v-model="form.nid">
                                     <span class="text-danger" v-if="errors.nid"> {{ errors.nid[0] }} </span>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword3">Employee Address</label>
-                            <input type="text" class="form-control" id="exampleInputPassword3" v-model="form.address">
+                            <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Employee Address" v-model="form.address">
                             <span class="text-danger" v-if="errors.address"> {{ errors.address[0] }} </span>
                         </div>
 
@@ -106,7 +106,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
                 <!-- card-body -->
@@ -130,25 +130,19 @@ export default {
     data(){
         return {
             form: {
-                name: '',
-                email: '',
-                phone: '',
-                salary: '',
-                joining_date: '',
-                nid: '',
-                address: '',
-                photo: '',
-                newphoto: ''
+                name: null,
+                email: null,
+                phone: null,
+                salary: null,
+                joining_date: null,
+                nid: null,
+                address: null,
+                photo: null
             },
             errors: {}
         }
     },
-    created(){
-        let id = this.$route.params.id
-        axios.get('/api/employee/'+id)
-        .then(({data}) => (this.form = data))
-        .catch(console.log('error'))
-    },
+
     methods: {
         oneFileSelected(event){
             let file = event.target.files[0];
@@ -157,24 +151,25 @@ export default {
             }else{
                 let reader = new FileReader();
                 reader.onload = event => {
-                    this.form.newphoto = event.target.result
+                    this.form.photo = event.target.result
+                    console.log(event.target.result)
                 };
                 reader.readAsDataURL(file);
             }
         },
 
-        employeeUpdate(){
-            let id = this.$route.params.id
-             axios.patch('/api/employee/'+id,this.form)
+        employeeInsert(){
+             axios.post('/api/employee',this.form)
              .then(() => {
                  this.$router.push({name: 'employee'})
-                 Notification.update()
+                 Notification.success()
              })
              .catch(error => this.errors = error.response.data.errors)
+             .catch(
+                    
+             )
         }
     }
-    
-
 }
 </script>
 

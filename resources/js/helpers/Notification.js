@@ -8,6 +8,15 @@ class Notification{
         }).show();
     }
 
+    update(){
+        new Noty({
+            type: 'success',
+            layout: 'topRight',
+            text: 'Update Successfully',
+            time: 1000  
+        }).show();
+    }
+
     alert(){
         new Noty({
             type: 'alert',

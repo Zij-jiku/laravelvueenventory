@@ -14,8 +14,14 @@ Route::group([
     Route::post('register', 'AuthController@register');
 });
 
+// EmployeeController Route
 Route::apiResource('/employee' , 'Api\EmployeeController');
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+// SupplierController Route
+Route::apiResource('/supplier' , 'Api\SupplierController');
+
+// CategoryController Route
+Route::apiResource('/category' , 'Api\CategoryController');
+
+// ProductController Route
+Route::apiResource('/product' , 'Api\ProductController');

@@ -171,12 +171,12 @@
                                 </router-link>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="calendar.html" class="waves-effect">
                                     <i class=" mdi mdi-calendar"></i>
                                     <span> Calendar </span>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="javascript: void(0);" class="waves-effect">
@@ -197,10 +197,35 @@
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><router-link to=""> Supplier Add</router-link></li>
-                                    <li><router-link to=""> Supplier All</router-link></li>
+                                    <li><router-link to="/store-supplier"> Supplier Add</router-link></li>
+                                    <li><router-link to="/all-supplier"> Supplier All</router-link></li>
                                 </ul>
                             </li>
+
+                            <li>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    <i class="mdi mdi-map-marker"></i>
+                                    <span> Categories </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><router-link to="/store-category"> Category Add</router-link></li>
+                                    <li><router-link to="/all-category"> Category All</router-link></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    <i class="mdi mdi-map-marker"></i>
+                                    <span> Product </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><router-link to="/store-product"> Product Add</router-link></li>
+                                    <li><router-link to="/all-product"> Product All</router-link></li>
+                                </ul>
+                            </li>
+
 
 
 
@@ -275,7 +300,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                2020 - 2021 &copy; Enventory (POS) theme created by <a href="#">Zij</a>
+                                2020 &copy; Inventory (POS) Software Created & Developed By <a href="#">Zij</a>
                             </div>
                         </div>
                     </div>
