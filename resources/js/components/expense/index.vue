@@ -4,12 +4,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h2 class="page-title">Employee View Page</h2>
+                <h2 class="page-title">Expense View Page</h2>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb p-0 m-0">
                         <li class="breadcrumb-item"><router-link to="/home">Dashboard</router-link></li>
-                        <li class="breadcrumb-item active">Employee All</li>
+                        <li class="breadcrumb-item active">Expense All</li>
                     </ol>
                 </div>
                 <div class="clearfix"></div>
@@ -23,8 +23,8 @@
     <div class="col-xl-12">
         <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title text-center">All Employee</h2>
-                    <router-link to="/store-employee" class="btn btn-success">Add Employee</router-link>
+                    <h2 class="card-title text-center">All Expense</h2>
+                    <router-link to="/store-expense" class="btn btn-success">Add Expense</router-link>
 
                 </div>
                 
@@ -36,31 +36,23 @@
                             <thead>
                                 <tr>
                                     <th> ID No.</th>
-                                    <th> Employee Name</th>
-                                    <th> Email</th>
-                                    <th> Joining Date</th>
-                                    <th> NID</th>
-                                    <th> Salary</th>
-                                    <th> Photo</th>
+                                    <th> Expense Details</th>
+                                    <th> Expense Date </th>
+                                    <th> Expense Amount </th>
                                     <th> Action</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr v-for="(employee,index) in filtersearch" :key="index">
-                                    <td> {{ employee.id }} </td>
-                                    <td> {{ employee.name }} </td>
-                                    <td> {{ employee.email }} </td>
-                                    <td> {{ employee.salary }} </td>
-                                    <td> {{ employee.joining_date }} </td>
-                                    <td> {{ employee.nid }} </td>
-                                    <td>
-                                        <img :src="employee.photo" alt="" style="width:80px; height:60px;">
-                                    </td>
+                                <tr v-for="(expense,index) in filtersearch" :key="index">
+                                    <td> {{ expense.expense_details }} </td>
+                                    <td> {{ expense.expense_date }} </td>
+                                    <td> {{ expense.amount }} </td>
+                                    
                                     <td>
                                         
-                                        <router-link :to="{ name: 'edit-employee',params:{id: employee.id}}" class="btn btn-sm btn-primary">Edit</router-link>
-                                        <a @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger text-light">Delete</a>
+                                        <router-link :to="{ name: 'edit-expense',params:{id: expense.id}}" class="btn btn-sm btn-primary">Edit</router-link>
+                                        <a @click="deleteExpense(expense.id)" class="btn btn-sm btn-danger text-light">Delete</a>
                                        
                                     </td>
                                    
@@ -91,27 +83,27 @@ export default {
     },
     data(){
         return{
-            employees: [],
+            expenses: [],
             searchTerm: ''
         }
     },
     computed: {
         filtersearch(){
-            return this.employees.filter(employee => {
-                return employee.name.match(this.searchTerm)
+            return this.expenses.filter(expense => {
+                return expense.expense_date.match(this.searchTerm)
                 // return employee.phone.match(this.searchTerm)
                 // return employee.email.match(this.searchTerm)
             });
         }
     },
     methods: {
-       allEmployee(){
-           axios.get('/api/employee')
-           .then(({data}) => (this.employees = data))
+       allExpense(){
+           axios.get('/api/expense')
+           .then(({data}) => (this.expenses = data))
            .catch()
        },
 
-       deleteEmployee(id){
+       deleteExpense(id){
 
            Swal.fire({
                 title: 'Are you sure?',
@@ -123,14 +115,14 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete('/api/employee/'+id)
+                    axios.delete('/api/expense/'+id)
                     .then(() => {
-                        this.employees = this.employees.filter(employee => {
-                            return employee.id != id
+                        this.expenses = this.expenses.filter(expense => {
+                            return expense.id != id
                         })
                     })
                     .catch(() => {
-                        this.$router.push({name: 'employee'})
+                        this.$router.push({name: 'expense'})
                     })
                     Swal.fire(
                     'Deleted!',
@@ -144,7 +136,7 @@ export default {
 
     },
     created(){
-        this.allEmployee();
+        this.allExpense();
     }
 }
 </script>

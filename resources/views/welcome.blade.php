@@ -166,9 +166,21 @@
 
                             <li>
                                 <router-link to="/home" class="waves-effect">
-                                    <i class="mdi mdi-home"></i>
+                                    <i class="mdi mdi-alpha-d-circle"></i>
                                     <span> Dashboard </span>
                                 </router-link>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    <i class="mdi mdi-cart-arrow-right"></i>
+                                    <span> Order </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><router-link to="/store-expense"> Order Add</router-link></li>
+                                    <li><router-link to="/all-expense"> Order All</router-link></li>
+                                </ul>
                             </li>
 
                             {{-- <li>
@@ -180,7 +192,7 @@
 
                             <li>
                                 <a href="javascript: void(0);" class="waves-effect">
-                                    <i class="mdi mdi-map-marker"></i>
+                                    <i class="mdi mdi-alpha-e-circle "></i>
                                     <span> Employee </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -192,7 +204,7 @@
 
                             <li>
                                 <a href="javascript: void(0);" class="waves-effect">
-                                    <i class="mdi mdi-map-marker"></i>
+                                    <i class="mdi mdi-alpha-s-circle "></i>
                                     <span> Suppliers </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -204,7 +216,7 @@
 
                             <li>
                                 <a href="javascript: void(0);" class="waves-effect">
-                                    <i class="mdi mdi-map-marker"></i>
+                                    <i class="mdi mdi-alpha-c-circle"></i>
                                     <span> Categories </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -216,7 +228,7 @@
 
                             <li>
                                 <a href="javascript: void(0);" class="waves-effect">
-                                    <i class="mdi mdi-map-marker"></i>
+                                    <i class="mdi mdi-alpha-p-circle"></i>
                                     <span> Product </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -227,8 +239,39 @@
                             </li>
 
 
+                            <li>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    <i class="mdi mdi-alpha-x-circle"></i>
+                                    <span> Expense </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><router-link to="/store-expense"> Expense Add</router-link></li>
+                                    <li><router-link to="/all-expense"> Expense All</router-link></li>
+                                </ul>
+                            </li>
 
 
+                            <li>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    <i class="mdi mdi-alpha-m-circle"></i>
+                                    <span> Salary </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><router-link to="/given-salary"> Salary Add</router-link></li>
+                                    <li><router-link to="/salary"> Salary All</router-link></li>
+                                </ul>
+                            </li>
+
+
+
+                            {{-- mdi mdi-alpha-c-circle-outline  - customer --}}
+                            {{-- mdi mdi-alpha-p-circle-outline  - Pos --}}
+                    
+
+
+{{-- 
                             <li>
                                 <a href="javascript: void(0);" class="waves-effect">
                                     <i class="mdi mdi-map-marker"></i>
@@ -239,7 +282,7 @@
                                     <li><a href="maps-google.html"> Google Map</a></li>
                                     <li><a href="maps-vector.html"> Vector Map</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
 
 
@@ -259,7 +302,7 @@
 
                             <li>
                                 <router-link to="logout" class="waves-effect">
-                                    <i class=" mdi mdi-power"></i>
+                                    <i class="mdi mdi-power"></i>
                                     <span> Logout </span>
                                 </router-link>
                             </li>

@@ -4,12 +4,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h2 class="page-title">Employee Add Page</h2>
+                <h2 class="page-title">Expense Add Page</h2>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb p-0 m-0">
                         <li class="breadcrumb-item"><router-link to="/home">Dashboard</router-link></li>
-                        <li class="breadcrumb-item active">Employee Add</li>
+                        <li class="breadcrumb-item active">Expense Add</li>
                     </ol>
                 </div>
                 <div class="clearfix"></div>
@@ -23,88 +23,36 @@
     <div class="col-xl-12">
         <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title text-center">Add Employee</h2>
-                    <router-link to="/all-employee" class="btn btn-success">All Employee</router-link>
+                    <h2 class="card-title text-center">Add Expense</h2>
+                    <router-link to="/all-expense" class="btn btn-success">All Expense</router-link>
                 </div>
                 <div class="card-body">
-                    <form class="user" @submit.prevent="employeeInsert" enctype="multipart/form-data">
+                    <form class="user" @submit.prevent="expenseInsert">
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Employee Name</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Employee full name" v-model="form.name">
-                                    <span class="text-danger" v-if="errors.name"> {{ errors.name[0] }} </span>
+                                    <label for="exampleInputPassword7">Expense Amount</label>
+                                    <input type="number" class="form-control" id="exampleInputPassword7" placeholder="Expense Amount" v-model="form.amount">
+                                    <span class="text-danger" v-if="errors.amount"> {{ errors.amount[0] }} </span>
                                 </div>
                             </div>
 
                             <div class="col-md-6">    
                                 <div class="form-group">
-                                    <label for="exampleInputPassword2">Employee Email</label>
-                                    <input type="email" class="form-control" id="exampleInputPassword2" placeholder="Employee email" v-model="form.email">
-                                    <span class="text-danger" v-if="errors.email"> {{ errors.email[0] }} </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword7">Employee Phone</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword7" placeholder="Employee Phone" v-model="form.phone">
-                                    <span class="text-danger" v-if="errors.phone"> {{ errors.phone[0] }} </span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">    
-                                <div class="form-group">
-                                    <label for="exampleInputPassword4">Employee Salary</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword4" placeholder="Employee Salary" v-model="form.salary">
-                                    <span class="text-danger" v-if="errors.salary"> {{ errors.salary[0] }} </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                               <div class="form-group">
-                                    <label for="exampleInputPassword5">Joining Date</label>
-                                    <input type="date" class="form-control" id="exampleInputPassword5" v-model="form.joining_date">
-                                    <span class="text-danger" v-if="errors.joining_date"> {{ errors.joining_date[0] }} </span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">    
-                               <div class="form-group">
-                                    <label for="exampleInputPassword6">Employee NID</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword6" placeholder="Employee NID" v-model="form.nid">
-                                    <span class="text-danger" v-if="errors.nid"> {{ errors.nid[0] }} </span>
+                                    <label for="exampleInputPassword4">Expense Date</label>
+                                    <input type="date" class="form-control" id="exampleInputPassword4" v-model="form.expense_date">
+                                    <span class="text-danger" v-if="errors.expense_date"> {{ errors.expense_date[0] }} </span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputPassword3">Employee Address</label>
-                            <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Employee Address" v-model="form.address">
-                            <span class="text-danger" v-if="errors.address"> {{ errors.address[0] }} </span>
+                            <label for="exampleInputPassword3">Expense Detials</label>
+                            <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Expense Detials" v-model="form.expense_details">
+                            <span class="text-danger" v-if="errors.expense_details"> {{ errors.expense_details[0] }} </span>
                         </div>
 
-
-                        <div class="row">
-                            <div class="col-md-6">
-                               <div class="form-group">
-                                    <label for="exampleInputPassword8">Employee Photo</label>
-                                    <input type="file" class="form-control" id="exampleInputPassword8" @change="oneFileSelected">
-                                    <!-- <span class="text-danger" v-if="errors.photo"> {{ errors.photo[0] }} </span> -->
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">    
-                               <div class="form-group">
-                                    <img :src="form.photo" style="width:100px; height: 80px;">
-                                </div>
-                            </div>
-                        </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -130,44 +78,22 @@ export default {
     data(){
         return {
             form: {
-                name: null,
-                email: null,
-                phone: null,
-                salary: null,
-                joining_date: null,
-                nid: null,
-                address: null,
-                photo: null
+                expense_details: null,
+                expense_date: null,
+                amount: null,
             },
             errors: {}
         }
     },
 
     methods: {
-        oneFileSelected(event){
-            let file = event.target.files[0];
-            if(file.size > 1048770){
-                Notification.img_val()
-            }else{
-                let reader = new FileReader();
-                reader.onload = event => {
-                    this.form.photo = event.target.result
-                    console.log(event.target.result)
-                };
-                reader.readAsDataURL(file);
-            }
-        },
-
-        employeeInsert(){
-             axios.post('/api/employee',this.form)
+        expenseInsert(){
+             axios.post('/api/expense',this.form)
              .then(() => {
-                 this.$router.push({name: 'employee'})
+                 this.$router.push({name: 'expense'})
                  Notification.success()
              })
              .catch(error => this.errors = error.response.data.errors)
-             .catch(
-                    
-             )
         }
     }
 }
