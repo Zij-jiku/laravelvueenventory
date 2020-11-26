@@ -4,12 +4,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h2 class="page-title">Product View Page</h2>
+                <h2 class="page-title">Stock View Page</h2>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb p-0 m-0">
                         <li class="breadcrumb-item"><router-link to="/home">Dashboard</router-link></li>
-                        <li class="breadcrumb-item active">Product All</li>
+                        <li class="breadcrumb-item active">Stock</li>
                     </ol>
                 </div>
                 <div class="clearfix"></div>
@@ -23,9 +23,8 @@
     <div class="col-xl-12">
         <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title text-center">All Product</h2>
-                    <router-link to="/store-product" class="btn btn-success">Add Product</router-link>
-                    <router-link to="/stock" class="btn btn-primary">Stock</router-link>
+                    <h2 class="card-title text-center">Stock Details</h2>
+                    <router-link to="/all-product" class="btn btn-success">All Product</router-link>
 
                 </div>
                 
@@ -37,13 +36,14 @@
                             <thead>
                                 <tr>
                                     <th> ID No.</th>
+                                    <th> Photo </th>
                                     <th> Product Name</th>
                                     <th> Category Name</th>
-                                    <th> Supplier Name</th>
                                     <th> Product Code </th>
                                     <th> Route </th>
-                                    <th> Selling Price </th>
-                                    <th> Photo </th>
+                                    <th> Buying Price </th>
+                                    <th> Product Quantity </th>
+                                    <th> Status </th>
                                     <th> Action </th>
                                 </tr>
                             </thead>
@@ -51,22 +51,28 @@
                             <tbody>
                                 <tr v-for="(product,index) in filtersearch" :key="index">
                                     <td> {{ product.id }} </td>
-                                    <td> {{ product.product_name }} </td>
-                                    <td> {{ product.category_name }} </td>
-                                    <td> {{ product.name }} </td>
-                                    <td> {{ product.product_code }} </td>
-                                    <td> {{ product.root }} </td>
-                                    <td> {{ product.selling_price }} </td>
                                     <td>
                                         <img :src="product.photo" alt="" style="width:80px; height:60px;">
                                     </td>
-                                    <td>
-                                        
-                                        <router-link :to="{ name: 'edit-product',params:{id: product.id}}" class="btn btn-sm btn-primary">Edit</router-link>
-                                        <a @click="deleteProduct(product.id)" class="btn btn-sm btn-danger text-light">Delete</a>
-                                       
+                                    <td> {{ product.product_name }} </td>
+                                    <td> {{ product.category_name }} </td>
+                                    <td> {{ product.product_code }} </td>
+                                    <td> {{ product.root }} </td>
+                                    <td> {{ product.buying_price }} </td>
+                                    <td> {{ product.product_quantity }} </td>
+
+                                    <td v-if="product.product_quantity >= 1 ">
+                                        <span class="badge badge-success">Available</span>
                                     </td>
-                                   
+                                    <td v-else>
+                                        <span class="badge badge-danger">Stock Out</span>
+                                    </td>
+
+                                    <td>   
+                                       <router-link :to="{ name: 'edit-stock',params:{id: product.id}}" class="btn btn-sm btn-primary">Stock Edit</router-link>
+                                    </td>
+
+
                                 </tr>
 
                             </tbody>
@@ -113,37 +119,6 @@ export default {
            .then(({data}) => (this.products = data))
            .catch()
        },
-
-       deleteProduct(id){
-
-           Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    axios.delete('/api/product/'+id)
-                    .then(() => {
-                        this.products = this.products.filter(product => {
-                            return product.id != id
-                        })
-                    })
-                    .catch(() => {
-                        this.$router.push({name: 'product'})
-                    })
-                    Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                    )
-                }
-            });
-
-       }
 
     },
     created(){

@@ -172,6 +172,13 @@
                             </li>
 
                             <li>
+                                <router-link to="/home" class="waves-effect">
+                                    <i class="mdi mdi-alpha-d-circle"></i>
+                                    <span> Pos </span>
+                                </router-link>
+                            </li>
+
+                            <li>
                                 <a href="javascript: void(0);" class="waves-effect">
                                     <i class="mdi mdi-cart-arrow-right"></i>
                                     <span> Order </span>
@@ -235,6 +242,7 @@
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><router-link to="/store-product"> Product Add</router-link></li>
                                     <li><router-link to="/all-product"> Product All</router-link></li>
+                                    <li><router-link to="/stock"> Stock</router-link></li>
                                 </ul>
                             </li>
 
@@ -264,11 +272,31 @@
                                 </ul>
                             </li>
 
+                            <li>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    <i class="mdi mdi-alpha-m-circle"></i>
+                                    <span> Customer </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><router-link to="/store-customer"> Customer Add</router-link></li>
+                                    <li><router-link to="/all-customer"> Customer All</router-link></li>
+                                </ul>
+                            </li>
+
+                            {{-- <li>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    <i class="mdi mdi-alpha-m-circle"></i>
+                                    <span> Sales Report </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><router-link to="/store-customer"> Report One</router-link></li>
+                                    <li><router-link to="/all-customer"> Report Two</router-link></li>
+                                </ul>
+                            </li> --}}
 
 
-                            {{-- mdi mdi-alpha-c-circle-outline  - customer --}}
-                            {{-- mdi mdi-alpha-p-circle-outline  - Pos --}}
-                    
 
 
 {{-- 

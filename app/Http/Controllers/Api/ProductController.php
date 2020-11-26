@@ -162,4 +162,16 @@ class ProductController extends Controller
             DB::table('products')->where('id',$id)->delete();
         }
     }
+
+    public function viewstock($id){
+        $stock_view = DB::table('products')->where('id' , $id)->first();
+        return response()->json($stock_view);
+    }
+
+    public function updatestock(Request $request,$id){
+        $data = array();
+        $data['product_quantity'] = $request->product_quantity;
+
+        DB::table('products')->where('id' , $id)->update($data);
+    }
 }
